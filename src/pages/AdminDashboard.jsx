@@ -14,7 +14,7 @@ if (!token) {
   navigate('/admin-login')
   return
 }
- fetch('http://localhost:5000/api/contacts', {
+fetch('https://nexa-digital-production-62b7.up.railway.app/api/contacts', {
   headers: {
     Authorization: `Bearer ${token}`
   }
