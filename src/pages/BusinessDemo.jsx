@@ -8,6 +8,7 @@ function BusinessDemo() {
   message: ''
 })
 const [successMessage, setSuccessMessage] = useState('')
+const [isSubmitting, setIsSubmitting] = useState(false)
 
   const handleChange = (e) => {
     setFormData({
@@ -18,6 +19,7 @@ const [successMessage, setSuccessMessage] = useState('')
 
   const handleSubmit = async (e) => {
     e.preventDefault()
+setIsSubmitting(true)
 
     try {
       const response = await fetch('http://localhost:5000/api/contact', {
@@ -33,16 +35,25 @@ const [successMessage, setSuccessMessage] = useState('')
       console.log(data)
 if (data.success) {
   setSuccessMessage('Message sent successfully!')
+  setIsSubmitting(false)
+  setTimeout(() => {
+  setSuccessMessage('')
+}, 4000)
   setFormData({
   name: '',
   email: '',
   message: ''
 })
+}else {
+  setIsSubmitting(false)
+  alert(data.message || 'Something went wrong!')
 }
-    } catch (error) {
-      console.error('Error:', error)
-      alert('Something went wrong!')
     }
+     catch (error) {
+  console.error('Error:', error)
+  setIsSubmitting(false)
+  alert('Unable to connect to server')
+}
   }
 
   return (
@@ -360,9 +371,9 @@ if (data.success) {
           </div>
 
 
-          <button type="submit">
-            Send Message
-          </button>
+         <button type="submit" disabled={isSubmitting}>
+  {isSubmitting ? 'Sending...' : 'Send Message'}
+</button>
 
         </form>
 

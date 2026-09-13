@@ -1,7 +1,10 @@
 import { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
+
 function AdminDashboard() {
     const [contacts, setContacts] = useState([])
+    const totalMessages = contacts.length
+    
     const navigate = useNavigate()
   
     useEffect(() => {
@@ -41,7 +44,13 @@ if (!token) {
   Logout
 </button>
       <h1>Admin Dashboard</h1>
-<div className="admin-table-wrapper"></div>
+      <div className="admin-stats">
+  <div className="admin-stat-card">
+    <span>Total Messages</span>
+    <strong>{totalMessages}</strong>
+  </div>
+</div>
+<div className="admin-table-wrapper">
 
      <table className="admin-table">
   <thead>
@@ -69,8 +78,7 @@ if (!token) {
   </tbody>
 </table>
    </div>
-   
+   </div>
   )
 }
-
 export default AdminDashboard
