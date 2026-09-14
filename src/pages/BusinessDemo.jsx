@@ -22,7 +22,7 @@ const [isSubmitting, setIsSubmitting] = useState(false)
 setIsSubmitting(true)
 
     try {
-      const response = await fetch('https://nexa-digital-production-62b7.up.railway.app/api/contact', {
+      const response = await fetch('${import.meta.env.VITE_API_URL}/api/contact', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'

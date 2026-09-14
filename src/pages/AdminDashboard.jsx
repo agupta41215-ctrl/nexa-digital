@@ -14,12 +14,14 @@ if (!token) {
   navigate('/admin-login')
   return
 }
-fetch('https://nexa-digital-production-62b7.up.railway.app/api/contacts', {
+
+fetch(`${import.meta.env.VITE_API_URL}/api/contacts`, {
   headers: {
     Authorization: `Bearer ${token}`
   }
 })
-    .then((response) => response.json())
+
+.then((response) => response.json())
     .then((data) => {
       if (data.success) {
         setContacts(data.contacts)
